@@ -21,6 +21,8 @@ struct ContentView_Previews: PreviewProvider {
 
 struct Home : View {
     @State var color = 0
+    @State var height = UIScreen.main.bounds.height
+    @State var width = UIScreen.main.bounds.width
     var body : some View {
         VStack {
             ZStack(alignment: .top){
@@ -86,89 +88,95 @@ struct Home : View {
                             .padding()
                         
                     }.padding(.horizontal , 10)
-                        .padding(.vertical , 20)
+                        .padding(.vertical , self.height > 800 ? 15 : 10)
                         .background(Color.white)
-                        .clipShape(CustomShape(corner: .bottomLeft, radii: 35))
+                        .clipShape(CustomShape(corner: .bottomLeft, radii: self.height > 800 ? 35 : 30))
                 }
             }.background(self.color == 0 ? Color.yellow : Color.orange )
                 .clipShape(CustomShape(corner: .bottomLeft, radii: 55))
-            
-            HStack{
-                Text("Melodi Lamp")
-                Spacer()
-                Button(action:{
+            ScrollView(self.height > 800 ? .init() : .vertical ,showsIndicators: false){
+                VStack{
+                    HStack{
+                        Text("Melodi Lamp")
+                        Spacer()
+                        Button(action:{
+                            
+                        }){
+                            Image("heart")
+                                .renderingMode(.original)
+                                .padding()
+                        }.background(self.color == 0 ? Color.yellow : Color.orange )
+                            .clipShape(Circle())
+                    }
+                    .padding(.horizontal , 35)
+                    .padding(.top, 25)
                     
-                }){
-                    Image("heart")
-                        .renderingMode(.original)
-                        .padding()
-                }.background(self.color == 0 ? Color.yellow : Color.orange )
-                    .clipShape(Circle())
+                    Text("The lampshape providesa derectional lighting above the dining table and pleasant diffused light throught the room")
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(.gray)
+                        .padding(.horizontal, 30)
+                        .padding(.top,20)
+                    Spacer(minLength: 0)
+                    
+                    HStack(spacing: 10){
+                        Button(action: {
+                            
+                        }){
+                            VStack{
+                                
+                                Image("mat1")
+                                    .renderingMode(.original)
+                                Text("22 W")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.black)
+                            }.padding()
+                        }.background(Color.black.opacity(0.06))
+                            .cornerRadius(12)
+                        Button(action: {
+                            
+                        }){
+                            VStack{
+                                
+                                Image("mat2")
+                                    .renderingMode(.original)
+                                Text("24 CM")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.black)
+                            }.padding()
+                        }.background(Color.black.opacity(0.06))
+                            .cornerRadius(12)
+                        Button(action: {
+                            
+                        }){
+                            VStack{
+                                
+                                Image("mat3")
+                                    .renderingMode(.original)
+                                Text("26 CM")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.black)
+                            }.padding()
+                        }.background(Color.black.opacity(0.06))
+                            .cornerRadius(12)
+                        Button(action: {
+                            
+                        }){
+                            VStack{
+                                
+                                Image("mat4")
+                                    .renderingMode(.original)
+                                Text("1.6 M")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.black)
+                            }.padding()
+                        }.background(Color.black.opacity(0.06))
+                            .cornerRadius(12)
+                        
+                    }.padding(.top , 20).padding(.bottom , 25)
+                    
+                    Spacer(minLength: 0)
+                }
             }
-            .padding(.horizontal , 35)
-            .padding(.top)
-            
-            Text("The lampshape providesa derectional lighting above the dining table and pleasant diffused light throught the room")
-                .multilineTextAlignment(.leading)
-                .foregroundColor(.gray)
-                .padding(.horizontal, 30)
-                .padding(.top,20)
-            
-            HStack(spacing: 15){
-                Button(action: {
-                    
-                }){
-                    VStack{
-                        
-                        Image("mat1")
-                                                .renderingMode(.original)
-                        Text("22 W")
-                            .fontWeight(.bold)
-                            .foregroundColor(.black)
-                    }.padding()
-                }.background(Color.black.opacity(0.06))
-                    .cornerRadius(12)
-                Button(action: {
-                    
-                }){
-                    VStack{
-                        
-                        Image("mat2")
-                                                .renderingMode(.original)
-                        Text("24 CM")
-                            .fontWeight(.bold)
-                            .foregroundColor(.black)
-                    }.padding()
-                }.background(Color.black.opacity(0.06))
-                    .cornerRadius(12)
-                Button(action: {
-                    
-                }){
-                    VStack{
-                        
-                        Image("mat3")
-                                                .renderingMode(.original)
-                        Text("26 CM")
-                            .fontWeight(.bold)
-                            .foregroundColor(.black)
-                    }.padding()
-                }.background(Color.black.opacity(0.06))
-                    .cornerRadius(12)
-                Button(action: {
-                    
-                }){
-                    VStack{
-                        
-                        Image("mat4")
-                                                .renderingMode(.original)
-                        Text("1.6 M")
-                            .fontWeight(.bold)
-                            .foregroundColor(.black)
-                    }.padding()
-                }.background(Color.black.opacity(0.06))
-                    .cornerRadius(12)
-                
-            }.padding(.top , 20)
             
             Spacer(minLength: 0)
             
@@ -185,7 +193,7 @@ struct Home : View {
                 }){
                     Text("Add to Cart")
                         .foregroundColor(.black)
-                        .padding(.vertical, 22)
+                        .padding(.vertical, 20)
                         .padding(.horizontal, 35)
                 }.background(self.color == 0 ? Color.yellow : Color.orange)
                     .clipShape(CustomShape(corner: .topLeft, radii: 55))
